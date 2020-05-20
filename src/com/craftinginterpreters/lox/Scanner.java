@@ -72,6 +72,8 @@ class Scanner {
                 if (match('/')) {
                     // A comment goes until the end of the line
                     while (peek() != '\n' && !isAtEnd()) advance();
+                } else if (match('*')) {
+                    blockComment();
                 } else {
                     addToken(SLASH);
                 }
@@ -99,6 +101,31 @@ class Scanner {
                 }
                 break;
         }
+    }
+
+    private void blockComment() {
+        while (peek() != '*' && !isAtEnd()) {
+            if (peek() == '\n') line++;
+            advance();
+        }
+
+        // Unterminated comment
+        if (isAtEnd()) {
+            Lox.error(line, "Unterminated comment");
+            return;
+        }
+
+        // The closing *
+        advance();
+
+        // Partially terminated comment
+        if (peek() != '/') {
+            Lox.error(line, "Partially terminated comment");
+            return;
+        }
+
+        // The closing /
+        advance();
     }
 
     private void identifier() {

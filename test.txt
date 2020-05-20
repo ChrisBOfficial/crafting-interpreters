@@ -1,0 +1,8 @@
+var language = "lox";
+var x = 6 + 9;
+
+// test comment
+/*  test
+    block */
+
+var y = 4 / 20;
