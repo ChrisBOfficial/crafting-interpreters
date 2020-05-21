@@ -1,5 +1,9 @@
-var a = 1;
-{
-    var a = a + 2;
-    print a;
+var a = 5;
+if (a != 0) {
+    print "nonzero";
+    a = 0;
+}
+
+if (a == 0) {
+    print "zero";
 }
