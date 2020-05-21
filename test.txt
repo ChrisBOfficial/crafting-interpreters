@@ -1,9 +1,5 @@
-var a = 5;
-if (a != 0) {
-    print "nonzero";
-    a = 0;
-}
-
-if (a == 0) {
-    print "zero";
+var a = 0;
+while (a < 5) {
+    print a;
+    a = a + 1;
 }
