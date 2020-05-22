@@ -1,7 +1,14 @@
-class bacon {
-    eat() {
-        print "Chew chew chew";
+/*
+    Test file for running the Lox interpreter
+*/
+
+class Cake {
+    taste() {
+        var adjective = "delicious";
+        print "The " + this.flavor + " cake is " + adjective + "!";
     }
 }
 
-bacon().eat(); // Prints "Chew chew chew"
+var cake = Cake();
+cake.flavor = "German chocolate";
+cake.taste(); // Prints "The German chocolate cake is delicious!"
