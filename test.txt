@@ -1,6 +1,7 @@
-func scope(a) {
-    var a = "local";
-    print a;
+class bacon {
+    eat() {
+        print "Chew chew chew";
+    }
 }
 
-scope("global");
+bacon().eat(); // Prints "Chew chew chew"
