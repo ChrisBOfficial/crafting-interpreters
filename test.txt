@@ -2,16 +2,7 @@
     Test file for running the Lox interpreter
 */
 
-func fib(n) {
-    if (n <= 1) {
-        return n;
-    }
-    return fib(n - 1) + fib(n - 2);
-}
-var start = std_clock();
+var a = "first";
+var b = "first";
 
-var n = 9;
-print fib(n);
-
-print std_clock() - start;
-print std_clock;
+print std_strcmp(a, b);

@@ -14,6 +14,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     Interpreter() {
         globals.define("std_clock", JStandardLib.clock);
+        globals.define("std_strcmp", JStandardLib.strcmp);
     }
 
     void interpret(List<Stmt> statements) {

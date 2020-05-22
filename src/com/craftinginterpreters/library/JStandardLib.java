@@ -25,4 +25,23 @@ public class JStandardLib {
             return "<std_clock:native fn>";
         }
     };
+
+    public static LoxCallable strcmp = new LoxCallable() {
+        @Override
+        public int arity() {
+            return 2;
+        }
+
+        @Override
+        public Object call(Interpreter interpreter, List<Object> arguments) {
+            String first = (String)arguments.get(0);
+            String second = (String)arguments.get(1);
+            return first.equals(second);
+        }
+
+        @Override
+        public String toString() {
+            return "<std_strcmp:native fn>";
+        }
+    };
 }
