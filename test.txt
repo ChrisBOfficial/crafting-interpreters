@@ -4,7 +4,7 @@
 
 class Food {
     eat() {
-        print "It's certainly edible";
+        print "It is certainly edible";
     }
 }
 
@@ -16,6 +16,7 @@ class Cake <: Food {
     taste() {
         var adjective = "delicious";
         print "The " + this.flavor + " cake is " + adjective + "!";
+        super.eat();
     }
 }
 
