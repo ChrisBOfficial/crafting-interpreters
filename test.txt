@@ -2,23 +2,16 @@
     Test file for running the Lox interpreter
 */
 
-class Food {
-    eat() {
-        print "It is certainly edible";
+func fib(n) {
+    if (n <= 1) {
+        return n;
     }
+    return fib(n - 1) + fib(n - 2);
 }
+var start = std_clock();
 
-class Cake <: Food {
-    init(flavor) {
-        this.flavor = flavor;
-    }
+var n = 9;
+print fib(n);
 
-    taste() {
-        var adjective = "delicious";
-        print "The " + this.flavor + " cake is " + adjective + "!";
-        super.eat();
-    }
-}
-
-var cake = Cake("Angel food");
-cake.taste();
+print std_clock() - start;
+print std_clock;
