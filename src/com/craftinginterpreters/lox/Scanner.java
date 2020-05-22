@@ -66,7 +66,15 @@ class Scanner {
             case '*': addToken(STAR); break;
             case '!': addToken(match('=') ? BANG_EQUAL : BANG); break;
             case '=': addToken(match('=') ? EQUAL_EQUAL : EQUAL); break;
-            case '<': addToken(match('=') ? LESS_EQUAL : LESS); break;
+            case '<':
+                if (match('=')) {
+                    addToken(LESS_EQUAL);
+                } else if (match(':')) {
+                    addToken(INHERIT);
+                } else {
+                    addToken(LESS);
+                }
+                break;
             case '>': addToken(match('=') ? GREATER_EQUAL : GREATER); break;
             case '/':
                 if (match('/')) {
