@@ -25,3 +25,5 @@ hs_err_pid*
 # IntelliJ config
 .idea/
 *.iml
+
+.vscode
