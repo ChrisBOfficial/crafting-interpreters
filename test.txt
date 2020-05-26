@@ -1,8 +1,0 @@
-/*
-    Test file for running the Lox interpreter
-*/
-
-var a = "first";
-var b = "first";
-
-print std_strcmp(a, b);

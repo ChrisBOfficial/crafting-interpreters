@@ -1,0 +1,13 @@
+/*
+    Test file for running the Lox interpreter
+*/
+
+func fib(n) {
+    if (n < 2) return n;
+    return fib(n - 1) + fib(n - 2);
+}
+
+var before = std_clock();
+print fib(40);
+var after = std_clock();
+print after - before;
