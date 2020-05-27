@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -75,24 +74,6 @@ static Token errorToken(const char* message) {
     return token;
 }
 
-static void blockComment() {
-    while (!isAtEnd()) {
-        if (peek() == '*' && peekNext() == '/') {
-            break;
-        } else if (peek() == '\n') scanner.line++;
-        advance();
-    }
-
-    if (isAtEnd()) {
-        fprintf(stderr, "Unterminated block comment");
-        exit(65);
-    }
-
-    // The closing '*/'
-    advance();
-    advance();
-}
-
 static void skipWhitespace() {
     for (;;) {
         char c = peek();
@@ -112,8 +93,6 @@ static void skipWhitespace() {
                 if (peekNext() == '/') {
                     // A comment goes until the end of the line
                     while (peek() != '\n' && !isAtEnd()) advance();
-                } else if (match('*')) {
-                    blockComment();
                 } else {
                     return;
                 }
