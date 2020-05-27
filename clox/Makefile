@@ -1,7 +1,7 @@
 .PHONY: all
 all: clox
 
-clox: main.c chunk.c memory.c debug.c value.c vm.c
+clox: main.c chunk.c memory.c debug.c value.c vm.c compiler.c scanner.c
 				gcc -Wall -O2 -std=c99 -o $@ $^
 
 .PHONY: clean
