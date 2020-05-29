@@ -1,2 +1,7 @@
 // test comment
-!(5 - 4 > 3 * 2 == !nil)
+var a = "one";
+{
+    var a = "two";
+    print a;
+}
+print a;
