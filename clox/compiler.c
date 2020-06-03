@@ -231,9 +231,9 @@ static void endScope() {
 		   current->locals[current->localCount - 1].depth > current->scopeDepth) {
 		if (current->locals[current->localCount - 1].isCaptured) {
             emitByte(OP_CLOSE_UPVALUE);
-        } else [
+        } else {
             emitByte(OP_POP);
-        ]
+        }
 		current->localCount--;
 	}
 }
