@@ -35,7 +35,7 @@ void printValue(Value value) {
 		case VAL_OBJ: printObject(value); break;
 	}
 }
-
+\
 bool valuesEqual(Value a, Value b) {
 	if (a.type != b.type) return false;
 
