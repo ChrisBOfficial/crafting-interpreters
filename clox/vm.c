@@ -11,6 +11,7 @@
 #include "vm.h"
 
 VM vm;	// [one]
+
 static Value clockNative(int argCount, Value* args) {
 	return NUMBER_VAL((double)clock() / CLOCKS_PER_SEC);
 }
@@ -30,8 +31,7 @@ static void runtimeError(const char* format, ...) {
 	for (int i = vm.frameCount - 1; i >= 0; i--) {
 		CallFrame* frame = &vm.frames[i];
 		ObjFunction* function = frame->function;
-		// -1 because the IP is sitting on the next instruction to be
-		// executed.
+		// -1 because the IP is sitting on the next instruction to be executed
 		size_t instruction = frame->ip - function->chunk.code - 1;
 		fprintf(stderr, "[line %d] in ", function->chunk.lines[instruction]);
 		if (function->name == NULL) {
@@ -84,12 +84,12 @@ static Value peek(int distance) {
 
 static bool call(ObjFunction* function, int argCount) {
 	if (argCount != function->arity) {
-		runtimeError("Expected %d arguments but got %d.", function->arity, argCount);
+		runtimeError("Expected %d arguments but got %d", function->arity, argCount);
 		return false;
 	}
 
 	if (vm.frameCount == FRAMES_MAX) {
-		runtimeError("Stack overflow.");
+		runtimeError("Stack overflow");
 		return false;
 	}
 
@@ -116,12 +116,12 @@ static bool callValue(Value callee, int argCount) {
 			}
 
 			default:
-				// Non-callable object type.
+				// Non-callable object type
 				break;
 		}
 	}
 
-	runtimeError("Can only call functions and classes.");
+	runtimeError("Can only call functions and classes");
 	return false;
 }
 
@@ -154,7 +154,7 @@ static InterpretResult run() {
 #define BINARY_OP(valueType, op)                          \
 	do {                                                  \
 		if (!IS_NUMBER(peek(0)) || !IS_NUMBER(peek(1))) { \
-			runtimeError("Operands must be numbers.");    \
+			runtimeError("Operands must be numbers");    \
 			return INTERPRET_RUNTIME_ERROR;               \
 		}                                                 \
 		double b = AS_NUMBER(pop());                      \
@@ -203,7 +203,7 @@ static InterpretResult run() {
 				ObjString* name = READ_STRING();
 				Value value;
 				if (!tableGet(&vm.globals, name, &value)) {
-					runtimeError("Undefined variable '%s'.", name->chars);
+					runtimeError("Undefined variable '%s'", name->chars);
 					return INTERPRET_RUNTIME_ERROR;
 				}
 				push(value);
@@ -221,7 +221,7 @@ static InterpretResult run() {
 				ObjString* name = READ_STRING();
 				if (tableSet(&vm.globals, name, peek(0))) {
 					tableDelete(&vm.globals, name);	 // [delete]
-					runtimeError("Undefined variable '%s'.", name->chars);
+					runtimeError("Undefined variable '%s'", name->chars);
 					return INTERPRET_RUNTIME_ERROR;
 				}
 				break;
@@ -244,7 +244,7 @@ static InterpretResult run() {
 					double a = AS_NUMBER(pop());
 					push(NUMBER_VAL(a + b));
 				} else {
-					runtimeError("Operands must be two numbers or two strings.");
+					runtimeError("Operands must be two numbers or two strings");
 					return INTERPRET_RUNTIME_ERROR;
 				}
 				break;
@@ -255,7 +255,7 @@ static InterpretResult run() {
 			case OP_NOT: push(BOOL_VAL(isFalsey(pop()))); break;
 			case OP_NEGATE:
 				if (!IS_NUMBER(peek(0))) {
-					runtimeError("Operand must be a number.");
+					runtimeError("Operand must be a number");
 					return INTERPRET_RUNTIME_ERROR;
 				}
 
@@ -321,8 +321,7 @@ static InterpretResult run() {
 }
 
 void hack(bool b) {
-	// Hack to avoid unused function error. run() is not used in the
-	// scanning chapter.
+	// Hack to avoid unused function error. run() is not used in the scanning chapter
 	run();
 	if (b) hack(false);
 }

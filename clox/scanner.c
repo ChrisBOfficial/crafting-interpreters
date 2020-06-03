@@ -87,7 +87,7 @@ static void skipWhitespace() {
 
 			case '/':
 				if (peekNext() == '/') {
-					// A comment goes until the end of the line.
+					// A comment goes until the end of the line
 					while (peek() != '\n' && !isAtEnd()) advance();
 				} else {
 					return;
@@ -118,7 +118,7 @@ static TokenType identifierType() {
 				switch (scanner.start[1]) {
 					case 'a': return checkKeyword(2, 3, "lse", TOKEN_FALSE);
 					case 'o': return checkKeyword(2, 1, "r", TOKEN_FOR);
-					case 'u': return checkKeyword(2, 1, "n", TOKEN_FUN);
+					case 'u': return checkKeyword(2, 2, "nc", TOKEN_FUNC);
 				}
 			}
 			break;
@@ -152,9 +152,9 @@ static Token identifier() {
 static Token number() {
 	while (isDigit(peek())) advance();
 
-	// Look for a fractional part.
+	// Look for a fractional part
 	if (peek() == '.' && isDigit(peekNext())) {
-		// Consume the ".".
+		// Consume the "."
 		advance();
 
 		while (isDigit(peek())) advance();
@@ -171,7 +171,7 @@ static Token string() {
 
 	if (isAtEnd()) return errorToken("Unterminated string.");
 
-	// The closing quote.
+	// The closing quote
 	advance();
 	return makeToken(TOKEN_STRING);
 }
